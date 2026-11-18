@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Store Walk-through</title>
+	<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+		#app { width: 100%; height: 100%; }
+		#info {
+			position: fixed;
+			left: 12px;
+			bottom: 12px;
+			font: 12px/1.5 system-ui, sans-serif;
+			color: rgba( 255, 255, 255, 0.7 );
+			pointer-events: none;
+			user-select: none;
+		}
+		#loading {
+			position: fixed;
+			inset: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font: 14px system-ui, sans-serif;
+			color: #fff;
+			background: #111;
+		}
+		#info a {
+			color: inherit;
+			pointer-events: auto;
+		}
+		/* タッチ端末: 操作案内は不要なので隠し、出典だけを画面右上へ。
+		   ジョイスティック（画面下）や左上のボタンと重ならない位置にする。 */
+		@media ( pointer: coarse ) {
+			#info {
+				left: auto;
+				bottom: auto;
+				top: 12px;
+				right: 12px;
+				text-align: right;
+				/* 左上のオートパイロットボタン（幅≈108px + 左12px）と余白ぶんを空け、
+				   折り返してもボタンの下に潜り込まないよう幅を制限する。 */
+				max-width: calc( 100% - 150px );
+			}
+			#info-controls,
+			#info br {
+				display: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div id="app"></div>
+	<div id="loading">Loading… 0%</div>
+	<div id="info"><span id="info-controls">WASD / 矢印キー: 移動 / スペース: ジャンプ / ドラッグ: カメラ回転 / ホイール: ズーム</span><br>3D model: <a href="https://sketchfab.com/3d-models/super-market-for-free-c14deca21a994978a8aa304561aced50" target="_blank" rel="noopener">&quot;Super market for free&quot;</a> by <a href="https://sketchfab.com/dasy444" target="_blank" rel="noopener">dasy444</a></div>
+	<script type="module" src="/src/main.js"></script>
+</body>
+</html>
